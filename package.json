@@ -1,0 +1,31 @@
+{
+  "name": "recipe-capstone-api",
+  "version": "1.0.0",
+  "description": "API for recipe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrienbelcastro/recipe-capstone-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adrienbelcastro/recipe-capstone-api/issues"
+  },
+  "homepage": "https://github.com/adrienbelcastro/recipe-capstone-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "knex": "^2.4.2",
+    "latest": "^0.2.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.3.1",
+    "react": "^18.2.0",
+    "react-scripts": "^5.0.1",
+    "scripts": "^0.1.0",
+    "uniqid": "^5.4.0"
+  }
+}
