@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/adrienbelcastro/recipe-capstone-api#readme",
   "dependencies": {
+    "axios": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "knex": "^2.4.2",
@@ -26,6 +27,7 @@
     "react": "^18.2.0",
     "react-scripts": "^5.0.1",
     "scripts": "^0.1.0",
-    "uniqid": "^5.4.0"
+    "uniqid": "^5.4.0",
+    "unsplash-js": "^7.0.18"
   }
 }
