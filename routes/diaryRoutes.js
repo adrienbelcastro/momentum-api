@@ -4,7 +4,10 @@ const fs = require("fs");
 
 const diaryController = require("../controllers/diaryController");
 
-router.route("/").get(diaryController.getMacros);
+router
+  .route("/meals")
+  .get(diaryController.getMacros)
+  .delete(diaryController.deleteMacro);
 
 router.route("/").post(diaryController.postMacros);
 
