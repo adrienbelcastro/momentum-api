@@ -11,8 +11,10 @@ exports.getArticlesList = (req, res) => {
 };
 
 exports.singleArticle = (req, res) => {
+  const articleId = req.params.id;
   knex("articles")
-    .select("article.id", "article.content", "article.image", "article.title")
+    .select("*")
+    .where("id", articleId)
     .then((data) => {
       res.status(200).send(data);
     })
