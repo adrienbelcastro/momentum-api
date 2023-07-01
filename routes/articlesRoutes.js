@@ -6,6 +6,6 @@ const articlesController = require("../controllers/articlesController");
 
 router.route("/article").get(articlesController.getArticlesList);
 
-router.route("/article/:articleId").get(articlesController.singleArticle);
+router.route("/article/:id").get(articlesController.singleArticle);
 
 module.exports = router;
