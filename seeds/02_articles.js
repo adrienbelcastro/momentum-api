@@ -78,7 +78,7 @@ exports.seed = function (knex) {
             title:
               "Indulgent Desserts: Satisfy Your Sweet Tooth with These Decadent Delights",
             image: imageURL4,
-            author: "Liam Mitchell",
+            author: "Bob Mitchell",
           },
           {
             id: "89898957-04ba-4bd0-9f5c-a7aea7447963",
