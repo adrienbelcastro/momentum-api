@@ -6,7 +6,7 @@ const uniqid = require("uniqid");
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
-
+const goalsRoutes = require("./routes/goalsRoutes");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 8080;
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
 
 app.use("/", diaryRoute);
 app.use("/", articlesRoutes);
+app.use("/", goalsRoutes);
 
 app.listen(PORT, () => {
   console.log(`APP is running on port ${PORT}`);
