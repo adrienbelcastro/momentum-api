@@ -6,7 +6,6 @@ const uniqid = require("uniqid");
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
-const goalsRoutes = require("./routes/goalsRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
 
@@ -29,7 +28,6 @@ app.use((req, res, next) => {
 
 app.use("/", diaryRoute);
 app.use("/", articlesRoutes);
-app.use("/", goalsRoutes);
 app.use("/", loginRoutes);
 app.use("/", registrationRoutes);
 
