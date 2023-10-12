@@ -5,10 +5,10 @@ const uniqid = require("uniqid");
 
 const registrationController = {
   register: (req, res) => {
-    const username = req.body.user_name;
-    const email = req.body.user_email;
-    const password = req.body.user_password;
-    const phone = req.body.phone_number;
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const phone = req.body.phone;
 
     db.select("id")
       .from("user")
