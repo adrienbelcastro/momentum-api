@@ -1,12 +1,10 @@
 const knex = require("knex")(require("../knexfile"));
-const uniqid = require("uniqid");
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const loginController = {
   login: (req, res) => {
-    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
 
@@ -14,7 +12,6 @@ const loginController = {
       .from("user")
       .where("user_name", username)
       .then((results) => {
-        console.log(results);
         if (results.length === 0) {
           return res.status(401).json({ message: "Authentication failed" });
         }
@@ -23,8 +20,6 @@ const loginController = {
 
         bcrypt.compare(password, user.user_password, (bcryptErr, bcryptRes) => {
           if (bcryptErr || !bcryptRes) {
-            console.log(bcryptErr);
-            console.log(bcryptRes);
             return res.status(401).json({ message: "Authentication failed" });
           }
 
