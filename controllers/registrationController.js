@@ -1,5 +1,5 @@
 const knex = require("knex")(require("../knexfile"));
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const db = require("../db");
 const uniqid = require("uniqid");
 
