@@ -4,6 +4,12 @@ const cors = require("cors");
 const fs = require("fs");
 const uniqid = require("uniqid");
 
+//connect to external db
+const mysql = require("mysql2");
+const connection = mysql.createConnection(process.env.DATABASE_URL);
+
+connection.connect();
+
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
 const loginRoutes = require("./routes/loginRoutes");
@@ -11,7 +17,7 @@ const registrationRoutes = require("./routes/registrationRoutes");
 
 require("dotenv").config();
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.DATABASE_URL || 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -30,6 +36,8 @@ app.use("/", diaryRoute);
 app.use("/", articlesRoutes);
 app.use("/", loginRoutes);
 app.use("/", registrationRoutes);
+
+//Add a page not found in error states
 
 app.listen(PORT, () => {
   console.log(`APP is running on port ${PORT}`);
