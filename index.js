@@ -1,14 +1,8 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const fs = require("fs");
-const uniqid = require("uniqid");
-
-//connect to external db
 const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
-
-connection.connect();
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
@@ -37,7 +31,9 @@ app.use("/", articlesRoutes);
 app.use("/", loginRoutes);
 app.use("/", registrationRoutes);
 
-//Add a page not found in error states
+// app.use((req, res, next) => {
+//   con;
+// });
 
 app.listen(PORT, () => {
   console.log(`APP is running on port ${PORT}`);

@@ -1,4 +1,3 @@
-const knex = require("knex")(require("../knexfile"));
 const db = require("../db");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -23,9 +22,13 @@ const loginController = {
             return res.status(401).json({ message: "Authentication failed" });
           }
 
-          const token = jwt.sign({ userId: user.id }, "your_secret_key", {
-            expiresIn: "1h",
-          });
+          const token = jwt.sign(
+            { userId: user.id },
+            process.env.JWT_SECRET_KEY,
+            {
+              expiresIn: "1h",
+            }
+          );
 
           res.status(200).json({ message: "Authentication successful", token });
         });
