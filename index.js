@@ -19,8 +19,6 @@ const articlesRoutes = require("./routes/articlesRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
 
-require("dotenv").config();
-
 const PORT = process.env.DATABASE_URL || 8080;
 
 app.use(cors());
