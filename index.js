@@ -1,18 +1,12 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
+
 const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 console.log("Connected to PlanetScale!");
 
-connection.connect((err) => {
-  if (err) {
-    console.error("Error connecting to the database: " + err.stack);
-    return;
-  }
-  console.log("Connected to the database!");
-});
+connection.connect();
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
