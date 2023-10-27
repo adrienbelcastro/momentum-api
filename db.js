@@ -1,6 +1,5 @@
-const mysql = require("mysql2");
-const connection = mysql.createConnection(process.env.DATABASE_URL);
-
-const db = connection;
+const knex = require("knex");
+const knexConfig = require("./knexfile");
+const db = knex(knexConfig);
 
 module.exports = db;
