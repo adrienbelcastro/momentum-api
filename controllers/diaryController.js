@@ -1,64 +1,71 @@
-const knex = require("knex")(require("../knexfile"));
+const mysql = require("mysql2");
+const connection = mysql.createConnection(process.env.DATABASE_URL);
 const uniqid = require("uniqid");
 
 exports.getMacros = (req, res) => {
-  knex("diary")
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      res.status(400).send(`Error Getting Nutritional Data`);
-    });
+  const query = "SELECT * FROM diary";
+
+  connection.query(query, (error, results) => {
+    if (error) {
+      console.error("Error getting article:", error);
+      res.status(400).send("Error Getting Article");
+    } else {
+      res.status(200).json(results);
+    }
+  });
 };
 
 exports.postMacros = (req, res) => {
-  console.log(req.body);
+  const body = req.body;
+
   if (
-    !req.body.name ||
-    !req.body.meal_type ||
-    !req.body.calories ||
-    !req.body.carbohydrates ||
-    !req.body.fats ||
-    !req.body.protein
+    !body.name ||
+    !body.meal_type ||
+    !body.calories ||
+    !body.carbohydrates ||
+    !body.fats ||
+    !body.protein
   ) {
-    console.log(req.body);
     return res.status(400).send("Invalid Nutritional Information");
   }
-  req.body.recipe_id = uniqid();
+  const recipe_id = uniqid();
+  const query =
+    "INSERT INTO diary (recipe_id, name, meal_type, calories, carbohydrates, fats, protein) VALUES (?,?,?,?,?,?,?)";
+  const values = [
+    recipe_id,
+    body.name,
+    body.meal_type,
+    body.calories,
+    body.carbohydrates,
+    body.fats,
+    body.protein,
+  ];
 
-  knex("diary")
-    .insert(req.body)
-    .then((data) => {
-      res.status(201).send(req.body);
-    })
-    .catch((err) =>
-      res.status(400).send(`Error displaying nutrition facts: ${err}`)
-    );
+  connection.query(query, values, (error, results) => {
+    if (error) {
+      if (error) {
+        console.error("Error getting article:", error);
+        res.status(400).send("Error Getting Article");
+      } else {
+        res.status(200).json(results);
+      }
+    }
+  });
 };
 
 exports.deleteMacro = (req, res) => {
   const recipeId = req.params.id;
 
-  console.log(recipeId);
+  const query = "DELETE FROM diary where recipe_id = ? ";
 
-  knex("diary")
-    .delete()
-    .where({ recipe_id: recipeId })
-    .then((data) => {
-      if (data === 0) {
-        res
-          .status(404)
-          .send(`No recipe with ID ${req.params.recipe_id} exists`);
-      } else {
-        res
-          .status(204)
-          .send(`Recipe with id: ${req.params.recipe_id} has been deleted`);
-      }
-    })
-    .catch((err) => {
-      console.log(req.params.recipe_id);
-      res
-        .status(500)
-        .send(`Error deleting recipe ${req.params.recipe_id}: ${err}`);
-    });
+  connection.query(query, values, (error, results) => {
+    if (error) {
+      console.error(`Error deleting recipe ${recipeId}: ${error}`);
+      res.status(500).send(`Error deleting recipe ${recipeId}: ${error}`);
+    } else if (results.affectedRows === 0) {
+      res.status(404).send(`No recipe with ID ${recipeId} exists`);
+    } else {
+      res.status(204).send(`Recipe with ID: ${recipeId} has been deleted`);
+    }
+  });
 };
