@@ -13,7 +13,7 @@ const articlesRoutes = require("./routes/articlesRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
 
-const PORT = process.env.DATABASE_URL || 8080;
+const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -28,10 +28,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", diaryRoute);
-app.use("/", articlesRoutes);
-app.use("/", loginRoutes);
-app.use("/", registrationRoutes);
+app.use("/meals", diaryRoute);
+app.use("/article", articlesRoutes);
+app.use("/login", loginRoutes);
+app.use("/register", registrationRoutes);
 
 // app.use((req, res, next) => {
 //   con;
