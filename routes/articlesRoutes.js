@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const articlesController = require("../controllers/articlesController");
 
-router.route("/article").get(articlesController.getArticlesList);
+router.route("/").get(articlesController.getArticlesList);
 
 router.route("/article/:id").get(articlesController.singleArticle);
 
