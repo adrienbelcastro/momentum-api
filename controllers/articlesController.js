@@ -1,5 +1,6 @@
 const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
+connection.connect();
 
 exports.getArticlesList = (req, res) => {
   const query = "SELECT * FROM articles";

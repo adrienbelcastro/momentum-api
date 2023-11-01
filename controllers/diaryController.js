@@ -1,6 +1,7 @@
+const uniqid = require("uniqid");
 const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
-const uniqid = require("uniqid");
+connection.connect();
 
 exports.getMacros = (req, res) => {
   const query = "SELECT * FROM diary";
