@@ -6,6 +6,7 @@ exports.getArticlesList = (req, res) => {
   const query = "SELECT * FROM articles";
 
   connection.query(query, (error, results) => {
+    console.log(error);
     if (error) {
       console.error("Error getting articles:", error);
       res.status(400).send("Error Getting Article Data");
