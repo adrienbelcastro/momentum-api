@@ -1,12 +1,13 @@
 module.exports.dropArticleTableSql = "DROP TABLE IF EXISTS articles";
 module.exports.dropUserTableSql = "DROP TABLE IF EXISTS user";
 module.exports.insertArticleTableSql =
-  "INSERT INTO articles (id, title, introduction, content, image, author) VALUES ?";
+  "INSERT INTO articles (id, introduction, content, title, image, author) VALUES (?,?,?,?,?,?)";
+
 module.exports.insertUserTableSql =
-  "INSERT INTO articles (id, user_name, user_password, user_email, phone_number) VALUES ?";
+  "INSERT INTO user (id, user_name, user_password, user_email, phone_number) VALUES (?,?,?,?,?)";
 
 module.exports.createArticleTableSql = `CREATE TABLE articles (
-    id CHAR(36) NOT NULL AUTO_INCREMENT,
+    id CHAR(36) NOT NULL,
     PRIMARY KEY(id),
     title VARCHAR(256),
     introduction TEXT,
@@ -16,7 +17,7 @@ module.exports.createArticleTableSql = `CREATE TABLE articles (
 )`;
 
 module.exports.createUserTableSql = `CREATE TABLE user (
-  id CHAR(36) NOT NULL AUTO_INCREMENT,
+  id CHAR(36) NOT NULL,
   PRIMARY KEY(id),
   user_name VARCHAR(100),
   user_password VARCHAR(100),
