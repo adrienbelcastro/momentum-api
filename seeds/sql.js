@@ -1,26 +1,35 @@
-module.exports.dropArticleTableSql = "DROP TABLE IF EXISTS articles";
-module.exports.dropUserTableSql = "DROP TABLE IF EXISTS user";
-module.exports.insertArticleTableSql =
-  "INSERT INTO articles (id, introduction, content, title, image, author) VALUES (?,?,?,?,?,?)";
+const dropArticleTableSql = "DROP TABLE IF EXISTS articles";
+const dropUserTableSql = "DROP TABLE IF EXISTS user";
+const insertArticleTableSql =
+  "INSERT INTO articles (id, title, introduction, content, image, author) VALUES (?)";
 
-module.exports.insertUserTableSql =
-  "INSERT INTO user (id, user_name, user_password, user_email, phone_number) VALUES (?,?,?,?,?)";
+const insertUserTableSql =
+  "INSERT INTO user (id, user_name, user_password, user_email, phone_number) VALUES (?) ";
 
-module.exports.createArticleTableSql = `CREATE TABLE articles (
+const createArticleTableSql = `CREATE TABLE articles (
     id CHAR(36) NOT NULL,
     PRIMARY KEY(id),
     title VARCHAR(256),
     introduction TEXT,
     content TEXT, 
     image VARCHAR(2000),
-    author VARCHAR(256)
+    author VARCHAR(256) 
 )`;
 
-module.exports.createUserTableSql = `CREATE TABLE user (
-  id CHAR(36) NOT NULL,
+const createUserTableSql = `CREATE TABLE user (
+  id CHAR(36),
   PRIMARY KEY(id),
   user_name VARCHAR(100),
   user_password VARCHAR(100),
   user_email VARCHAR(100),
   phone_number VARCHAR(15)
 )`;
+
+module.exports = {
+  dropArticleTableSql,
+  dropUserTableSql,
+  insertArticleTableSql,
+  insertUserTableSql,
+  createArticleTableSql,
+  createUserTableSql,
+};
