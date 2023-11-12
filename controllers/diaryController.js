@@ -5,9 +5,7 @@ connection.connect();
 
 exports.getMacros = (req, res) => {
   const query = "SELECT * FROM diary";
-
   connection.query(query, (error, results) => {
-    console.log(error);
     if (error) {
       console.error("Error getting article:", error);
       res.status(400).send("Error Getting Article");
