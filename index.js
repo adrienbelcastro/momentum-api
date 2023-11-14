@@ -9,6 +9,11 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
+
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
 const loginRoutes = require("./routes/loginRoutes");
