@@ -45,7 +45,7 @@ exports.postMacros = (req, res) => {
     if (error) {
       if (error) {
         console.error("Error getting article:", error);
-        res.status(400).send("Error Getting Article");
+        res.status(400).send("Error inserting into diary");
       } else {
         res.status(200).json(results);
       }
@@ -56,9 +56,9 @@ exports.postMacros = (req, res) => {
 exports.deleteMacro = (req, res) => {
   const recipeId = req.params.id;
 
-  const query = "DELETE FROM diary where recipe_id = ? ";
+  const query = "DELETE FROM diary WHERE recipe_id = ? ";
 
-  connection.query(query, values, (error, results) => {
+  connection.query(query, [recipeId], (error, results) => {
     if (error) {
       console.error(`Error deleting recipe ${recipeId}: ${error}`);
       res.status(500).send(`Error deleting recipe ${recipeId}: ${error}`);
