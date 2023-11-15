@@ -9,6 +9,9 @@ const loginController = {
     const username = req.body.username;
     const password = req.body.password;
 
+    console.log(username);
+    console.log(password);
+
     const selectQuery = "SELECT * FROM  user WHERE user_name = ?";
 
     connection.query(selectQuery, [username], (error, results) => {
