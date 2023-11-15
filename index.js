@@ -13,13 +13,13 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+app.use(cors());
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
 const loginRoutes = require("./routes/loginRoutes");
 const registrationRoutes = require("./routes/registrationRoutes");
 
-app.use(cors());
 app.use(express.json());
 
 app.use("/meals", diaryRoute);
