@@ -10,9 +10,11 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 connection.connect();
 
 app.use((req, res, next) => {
+  console.log("Incoming request:", req.method, req.url);
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+
 app.use(cors());
 
 const diaryRoute = require("./routes/diaryRoutes");
