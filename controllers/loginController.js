@@ -6,6 +6,7 @@ connection.connect();
 
 const loginController = {
   login: (req, res) => {
+    console.log(req);
     const username = req.body.username;
     const password = req.body.password;
 
@@ -17,7 +18,7 @@ const loginController = {
     connection.query(selectQuery, [username], (error, results) => {
       if (error) {
         console.error(`Error selecting user: ${error}`);
-        return res.status(500).json({ message: "Intenral Server Error" });
+        return res.status(500).json({ message: "Internal Server Error" });
       }
       if (results.length === 0) {
         return res.status(401).json({ message: "User not found" });
