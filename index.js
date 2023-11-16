@@ -9,6 +9,8 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
 
+app.options("*", cors());
+
 app.use(
   cors({
     allowedHeaders: ["Content-Type", "Authorization"],
