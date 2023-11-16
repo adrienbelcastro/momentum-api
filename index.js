@@ -8,14 +8,12 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
+const corsOptions = {
+  origin: "https://momentum-git-feature-api-test-adrienbelcastro.vercel.app",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
-app.use((req, res, next) => {
-  console.log("Incoming request:", req.method, req.url);
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-
-app.use(cors());
+app.use(cors(corsOptions));
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
