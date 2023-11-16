@@ -9,11 +9,7 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
 
-app.use(
-  cors({
-    origin: "https://momentum-git-feature-api-test-adrienbelcastro.vercel.app",
-  })
-);
+app.use(cors());
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
