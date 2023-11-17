@@ -1,12 +1,12 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const mysql = require("mysql2");
+require("dotenv").config();
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 connection.connect();
 
 const loginController = {
   login: (req, res) => {
-    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
 
