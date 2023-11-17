@@ -27,6 +27,8 @@ const loginController = {
       const user = results[0];
 
       bcrypt.compare(password, user.user_password, (bcryptErr, bcryptRes) => {
+        console.log(bcryptErr);
+        console.log(bcryptRes);
         if (bcryptErr || !bcryptRes) {
           return res.status(401).json({ message: "Invalid Password" });
         }
