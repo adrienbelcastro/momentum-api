@@ -10,9 +10,6 @@ const loginController = {
     const username = req.body.username;
     const password = req.body.password;
 
-    console.log(username);
-    console.log(password);
-
     const selectQuery = "SELECT * FROM  user WHERE user_name = ?";
 
     connection.query(selectQuery, [username], (error, results) => {
@@ -27,14 +24,13 @@ const loginController = {
       const user = results[0];
 
       bcrypt.compare(password, user.user_password, (bcryptErr, bcryptRes) => {
-        console.log(bcryptErr);
-        console.log(bcryptRes);
         if (bcryptErr || !bcryptRes) {
           return res.status(401).json({ message: "Invalid Password" });
         }
 
         const token = jwt.sign(
           { userId: user.id },
+          console.log(process.env.JWT_SECRET_KEY),
           process.env.JWT_SECRET_KEY,
           {
             expiresIn: "1h",
