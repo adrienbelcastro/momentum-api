@@ -30,7 +30,6 @@ const loginController = {
 
         const token = jwt.sign(
           { userId: user.id },
-          console.log(process.env.JWT_SECRET_KEY),
           process.env.JWT_SECRET_KEY,
           {
             expiresIn: "1h",
