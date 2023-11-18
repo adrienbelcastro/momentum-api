@@ -28,13 +28,9 @@ const loginController = {
           return res.status(401).json({ message: "Invalid Password" });
         }
 
-        const token = jwt.sign(
-          { userId: user.id },
-          process.env.JWT_SECRET_KEY,
-          {
-            expiresIn: "1h",
-          }
-        );
+        const token = jwt.sign({ userId: user.id }, "7HZWIYPuJq", {
+          expiresIn: "1h",
+        });
 
         res.status(200).json({ message: "Authentication successful", token });
       });
