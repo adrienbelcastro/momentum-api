@@ -1,13 +1,12 @@
 const uniqid = require("uniqid");
-const mysql = require("mysql2");
-const { PoolConnection } = require("mysql2/typings/mysql/lib/PoolConnection");
+const mysql = require("mysql2/promise");
 const pool = mysql.createPool(process.env.DATABASE_URL);
 
 exports.getMacros = (req, res) => {
   pool
     .getConnection()
     .then((connection) => {
-      return connection
+      connection
         .query("SELECT * FROM diary")
         .then(([results]) => {
           connection.release();
