@@ -9,8 +9,12 @@ const mysql = require("mysql2");
 const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
-
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 const diaryRoute = require("./routes/diaryRoutes");
 const articlesRoutes = require("./routes/articlesRoutes");
