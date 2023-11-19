@@ -36,6 +36,12 @@ const loginController = {
           }
         );
 
+        res.cookie("accessToken", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production", // Set to true in production for HTTPS
+          maxAge: 3600000, // 1 hour expiration
+        });
+
         res.status(200).json({ message: "Authentication successful", token });
       });
     });
