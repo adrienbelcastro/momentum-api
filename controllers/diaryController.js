@@ -73,7 +73,8 @@ exports.deleteMacro = (req, res) => {
   const recipeId = req.params.id;
   const query = "DELETE FROM diary WHERE recipe_id = ? ";
 
-  PoolConnection.getConnection()
+  pool
+    .getConnection()
     .then((connection) => {
       return connection
         .query(query, [recipeId])
