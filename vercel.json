@@ -10,7 +10,7 @@
     {
       "src": "/(.*)",
       "dest": "/",
-      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "methods": ["POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "https://momentum-git-feature-api-test-adrienbelcastro.vercel.app",
         "Access-Control-Allow-Methods": "POST, PUT, DELETE, PATCH, OPTIONS",
