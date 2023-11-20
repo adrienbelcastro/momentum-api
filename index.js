@@ -10,7 +10,7 @@ const connection = mysql.createConnection(process.env.DATABASE_URL);
 
 connection.connect();
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "https://momentum-git-feature-api-test-adrienbelcastro.vercel.app/",
   credentials: true,
   optionSuccessStatus: 200,
 };
