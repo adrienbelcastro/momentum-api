@@ -24,6 +24,7 @@ const registrationRoutes = require("./routes/registrationRoutes");
 app.use(express.json());
 app.use(cookieParser());
 
+
 app.use("/meals", diaryRoute);
 app.use("/article", articlesRoutes);
 app.use("/login", loginRoutes);
