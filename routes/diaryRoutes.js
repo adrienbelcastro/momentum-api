@@ -6,7 +6,7 @@ const diaryController = require("../controllers/diaryController");
 
 router.route("/").get(diaryController.getMacros);
 
-router.route("/meals/:id").delete(diaryController.deleteMacro);
+router.route("/:id").delete(diaryController.deleteMacro);
 
 router.route("/").post(diaryController.postMacros);
 

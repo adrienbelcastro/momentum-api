@@ -1,19 +1,26 @@
 const uniqid = require("uniqid");
-const mysql = require("mysql2");
-const connection = mysql.createConnection(process.env.DATABASE_URL);
-connection.connect();
+const mysql = require("mysql2/promise");
+const pool = mysql.createPool(process.env.DATABASE_URL);
 
 exports.getMacros = (req, res) => {
-  const query = "SELECT * FROM diary";
-
-  connection.query(query, (error, results) => {
-    if (error) {
-      console.error("Error getting article:", error);
-      res.status(400).send("Error Getting Article");
-    } else {
-      res.status(200).json(results);
-    }
-  });
+  pool
+    .getConnection()
+    .then((connection) => {
+      connection
+        .query("SELECT * FROM diary")
+        .then(([results]) => {
+          connection.release();
+          res.status(200).json(results);
+        })
+        .catch((error) => {
+          console.error("Error getting article:", error);
+          res.status(400).send("Error Getting Article");
+        });
+    })
+    .catch((error) => {
+      console.error("Error acquiring database connection:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 exports.postMacros = (req, res) => {
@@ -42,31 +49,52 @@ exports.postMacros = (req, res) => {
     body.protein,
   ];
 
-  connection.query(query, values, (error, results) => {
-    if (error) {
-      if (error) {
-        console.error("Error getting article:", error);
-        res.status(400).send("Error Getting Article");
-      } else {
-        res.status(200).json(results);
-      }
-    }
-  });
+  pool
+    .getConnection()
+    .then((connection) => {
+      return connection
+        .query(query, values)
+        .then((results) => {
+          connection.release();
+          res.status(200).json(results);
+        })
+        .catch((error) => {
+          console.error("Error getting article:", error);
+          res.status(400).send("Error inserting into diary");
+        });
+    })
+    .catch((error) => {
+      console.error("Error acquiring database connection:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };
 
 exports.deleteMacro = (req, res) => {
   const recipeId = req.params.id;
+  const query = "DELETE FROM diary WHERE recipe_id = ? ";
 
-  const query = "DELETE FROM diary where recipe_id = ? ";
-
-  connection.query(query, values, (error, results) => {
-    if (error) {
-      console.error(`Error deleting recipe ${recipeId}: ${error}`);
-      res.status(500).send(`Error deleting recipe ${recipeId}: ${error}`);
-    } else if (results.affectedRows === 0) {
-      res.status(404).send(`No recipe with ID ${recipeId} exists`);
-    } else {
-      res.status(204).send(`Recipe with ID: ${recipeId} has been deleted`);
-    }
-  });
+  pool
+    .getConnection()
+    .then((connection) => {
+      return connection
+        .query(query, [recipeId])
+        .then((results) => {
+          connection.release();
+          if (results.affectedRows === 0) {
+            res.status(404).send(`No recipe with ID ${recipeId} exists`);
+          } else {
+            res
+              .status(204)
+              .send(`Recipe with ID: ${recipeId} has been deleted`);
+          }
+        })
+        .catch((error) => {
+          console.error(`Error deleting recipe ${recipeId}: ${error}`);
+          res.status(500).send(`Error deleting recipe ${recipeId}: ${error}`);
+        });
+    })
+    .catch((error) => {
+      console.error("Error acquiring database connection:", error);
+      res.status(500).send("Internal Server Error");
+    });
 };
