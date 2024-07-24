@@ -1,5 +1,0 @@
-load database
-  from mysql://root:@localhost/
-  into postgresql://postgres.oadmnkgbpatbrxfoospk:29772977AbcD$@aws-0-us-west-1.pooler.supabase.com:5432/postgres
-alter schema 'public' owner to 'postgres';
-set wal_buffers = '64MB', max_wal_senders = 0, statement_timeout = 0, work_mem to '2GB';
